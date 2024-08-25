@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  tasky-api:
+    image: tasky-api
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - tasky-db
+    environment:
+      - DATABASE_URL=postgresql://postgres:admin123@tasky-db:5432/tasky
+
+  tasky-db:
+    image: postgres:14
+    container_name: tasky-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - tasky-data:/var/lib/postgres/data
+    environment:
+      - POSTGRES_DB=tasky
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin123
+
+volumes:
+  tasky-data:
