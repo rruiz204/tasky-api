@@ -27,10 +27,7 @@ def downgrade(engine_name: str) -> None:
     globals()["downgrade_%s" % engine_name]()
 
 
-
-
-
-def upgrade_engine1() -> None:
+def create_tag_table() -> None:
     op.create_table(
         "tags",
         sa.Column("id", sa.Integer, primary_key=True),
@@ -38,6 +35,10 @@ def upgrade_engine1() -> None:
         sa.Column("created_at", sa.DateTime, server_default=func.now()),
         sa.Column("updated_at", sa.DateTime, server_default=func.now(), onupdate=func.now())
     )
+
+
+def upgrade_engine1() -> None:
+    create_tag_table()
 
 
 def downgrade_engine1() -> None:
@@ -45,13 +46,7 @@ def downgrade_engine1() -> None:
 
 
 def upgrade_engine2() -> None:
-    op.create_table(
-        "tags",
-        sa.Column("id", sa.Integer, primary_key=True),
-        sa.Column("name", sa.String(20), nullable=False),
-        sa.Column("created_at", sa.DateTime, server_default=func.now()),
-        sa.Column("updated_at", sa.DateTime, server_default=func.now(), onupdate=func.now())
-    )
+    create_tag_table()
 
 
 def downgrade_engine2() -> None:
