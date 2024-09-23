@@ -1,25 +1,15 @@
-from typing import List
-from app.graphql.schema.user import UserType, UserInput
-from app.validations.user import UserInputModel
-from app.services.data import users
+from app.database.unit_of_work import UnitOfWork
+from app.graphql.schema.user_types import UserInput
+from app.schemas.user.create_user_schema import CreateUserSchena
+from app.models.user import User
 
-def get_all_users() -> List[UserType]:
-  return [UserType(**user) for user in users]
-
-def get_specific_user(user_id: int) -> UserType:
-  user = list(filter(lambda user: user["id"] == user_id, users))
-  if (not user): raise ValueError(f"User with id {user_id} not found")
-  return UserType(**user[0])
-
-def create_user(input: UserInput) -> UserType:
-  valid = UserInputModel(username=input.username, email=input.email, password=input.password)
+class UserService:
+  def __init__(self):
+    self.uow = UnitOfWork()
   
-  new_id = max(user["id"] for user in users) + 1 if users else 1
-  new_user = {
-    "id": new_id,
-    "username": valid.username,
-    "email": valid.email,
-    "password": valid.password
-  }
-  users.append(new_user)
-  return UserType(**new_user)
+  def get_all_users(self):
+    return self.uow.users.get_users();
+
+  def create_new_user(self, input: UserInput):
+    user = CreateUserSchena(**input.__dict__)
+    return self.uow.users.create_user(User(username=user.username, email=user.email, password=user.password))
