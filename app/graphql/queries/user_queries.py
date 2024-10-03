@@ -10,4 +10,4 @@ class UserQuery:
   def users(self) -> List[UserType]: 
     service = UserService()
     users = service.get_all_users()
-    return [UserType(id=user.id, username=user.username, email=user.email) for user in users]
+    return [UserType.from_orm(user=user) for user in users]

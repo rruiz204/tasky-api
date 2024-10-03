@@ -9,4 +9,4 @@ class TagMutation():
   def create_tag(self, input: CreateTagInput) -> TagType:
     service = TagService()
     tag = service.create_new_tag(input=input)
-    return TagType(id=tag.id, name=tag.name)
+    return TagType.from_orm(tag=tag)

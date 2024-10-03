@@ -10,4 +10,4 @@ class TagQuery:
   def tags(self) -> List[TagType]: 
     service = TagService()
     tags = service.get_all_tags()
-    return [TagType(id=tag.id, name=tag.name) for tag in tags]
+    return [TagType.from_orm(tag=tag) for tag in tags]
