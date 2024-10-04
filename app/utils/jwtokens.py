@@ -1,11 +1,6 @@
+from app.config import SECRET_KEY
 from jose import jwt
 import datetime
-
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-SECRET_KEY = os.getenv("SECRET_KEY")
 
 class JWTokens:
   
