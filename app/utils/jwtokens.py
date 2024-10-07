@@ -1,4 +1,4 @@
-from app.config import SECRET_KEY
+from app.configuration.environment import SECRET_KEY
 from jose import jwt
 import datetime
 
