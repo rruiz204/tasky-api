@@ -3,6 +3,7 @@ version: '3'
 services:
   tasky-api:
     image: tasky-api
+    container_name: tasky-api
     build: 
       context: .
       dockerfile: Dockerfile
@@ -25,5 +26,24 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=admin123
 
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+
 volumes:
   tasky-data:
+  grafana-data:
