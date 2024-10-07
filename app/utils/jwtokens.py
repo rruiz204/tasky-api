@@ -12,5 +12,5 @@ class JWTokens:
   
   @staticmethod
   def verify(token: str):
-    payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-    return payload
+    if (token is None): raise Exception("User is not authenticated")
+    return jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
