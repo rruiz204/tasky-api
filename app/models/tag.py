@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String, Integer, DateTime
-from app.database.db import Base
+from app.database.context import Base
 from sqlalchemy.sql import func
 
 class Tag(Base):

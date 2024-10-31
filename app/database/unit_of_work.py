@@ -1,4 +1,4 @@
-from app.database.db import get_db
+from app.database.context import get_db
 from app.repositories.user_repository import UserRepository
 from app.repositories.tag_repository import TagRepository
 
