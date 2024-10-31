@@ -6,8 +6,8 @@ class MetricExtension(SchemaExtension):
     yield
     
     # Graphql Request Total Metric
-    graphql_request_total_metric = GraphqlRequestTotalMetric(self.execution_context.query)
+    """ graphql_request_total_metric = GraphqlRequestTotalMetric(self.execution_context.query)
     graphql_request_total_metric.get_labels()
-    graphql_request_total_metric.increase()
+    graphql_request_total_metric.increase() """
     
     

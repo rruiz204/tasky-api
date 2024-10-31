@@ -1,6 +1,7 @@
 import re
 from typing import Dict, Any
 from prometheus_client import Counter
+from prometheus.interfaces.counter_metric import CounterMetric
 
 graphql_requests_total = Counter(
   name="graphql_requests_total",
@@ -8,10 +9,10 @@ graphql_requests_total = Counter(
   labelnames=("type", "name")
 )
 
-class GraphqlRequestTotalMetric:
+class GraphqlRequestTotalMetric(CounterMetric):
   def __init__(self, query: str) -> None:
     self.pattern = r'(\w+)\s*{\s*(\w+)'
-    self.labels = {self.get_labels(query)}
+    self.labels = self.get_labels(query)
 
   def get_labels(self, query: str) -> Dict[str, Any]:
     match = re.search(self.pattern, query)
