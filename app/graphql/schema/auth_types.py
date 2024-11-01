@@ -2,7 +2,7 @@ import strawberry
 
 @strawberry.type
 class AuthTokenType:
-  type: str = "Bearer"
+  type: str
   token: str
 
   @classmethod
