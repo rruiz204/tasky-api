@@ -11,5 +11,4 @@ class UserQuery:
   @strawberry.field
   def users(self) -> List[UserType]: 
     use_case = GetUsersUseCase()
-    users = use_case.execute()
-    return [UserType.from_orm(user=user) for user in users]
+    return use_case.execute()

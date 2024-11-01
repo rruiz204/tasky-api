@@ -8,5 +8,4 @@ class UserMutation():
   @strawberry.mutation
   def create_user(self, input: CreateUserInput) -> UserType:
     use_case = CreateUserUseCase()
-    user = use_case.execute(input=input)
-    return UserType.from_orm(user=user)
+    return use_case.execute(input=input)
