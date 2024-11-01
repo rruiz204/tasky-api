@@ -1,12 +1,11 @@
 import strawberry
-from app.services.user_service import UserService
 from app.graphql.schema.user_types import UserType, CreateUserInput
+from app.use_cases.user.create_user.create_user_use_case import CreateUserUseCase
 
 @strawberry.type
 class UserMutation():
 
   @strawberry.mutation
   def create_user(self, input: CreateUserInput) -> UserType:
-    service = UserService()
-    user = service.create_new_user(input=input)
-    return UserType.from_orm(user=user)
+    use_case = CreateUserUseCase()
+    return use_case.execute(input=input)

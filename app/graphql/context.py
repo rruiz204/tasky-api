@@ -1,4 +1,4 @@
-from typing import Dict, Any
+""" from typing import Dict, Any
 from app.utils.jwtokens import JWTokens
 from functools import cached_property
 from strawberry.fastapi import BaseContext
@@ -10,4 +10,4 @@ class Context(BaseContext):
     return JWTokens.verify(self.request.headers.get("Auhtorization", None))
   
 async def get_context() -> Context:
-  return Context()
+  return Context() """

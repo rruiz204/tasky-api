@@ -1,12 +1,11 @@
 import strawberry
-from app.services.auth_service import AuthService
-from app.graphql.schema.auth_types import AuthTokenType, LoginUserInput
+from app.graphql.schema.auth_types import LoginUserInput, AuthTokenType
+from app.use_cases.authentication.login_user.login_user_use_case import LoginUserUseCase
 
 @strawberry.type
 class AuthMutation:
   
   @strawberry.mutation
   def login_user(self, input: LoginUserInput) -> AuthTokenType:
-    service = AuthService()
-    token = service.login_user(input=input)
-    return AuthTokenType.from_orm(token=token)
+    use_case = LoginUserUseCase()
+    return use_case.execute(input=input)

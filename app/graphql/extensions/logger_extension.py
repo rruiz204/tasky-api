@@ -1,4 +1,4 @@
-from app.configuration.logger import logger
+from app.services.logger_service import logger
 from strawberry.extensions import SchemaExtension
 
 class LoggerExtension(SchemaExtension):

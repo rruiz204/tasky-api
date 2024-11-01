@@ -1,14 +1,14 @@
 import strawberry
 from typing import List
-from app.services.user_service import UserService
 from app.graphql.schema.user_types import UserType
-from app.graphql.permissions.is_authenticated import IsAuthenticated
+from app.use_cases.user.get_users.get_users_use_case import GetUsersUseCase
+""" from app.graphql.permissions.is_authenticated import IsAuthenticated """
+""" @strawberry.field(permission_classes=[IsAuthenticated]) """
 
 @strawberry.type
 class UserQuery:
 
-  @strawberry.field(permission_classes=[IsAuthenticated])
+  @strawberry.field
   def users(self) -> List[UserType]: 
-    service = UserService()
-    users = service.get_all_users()
-    return [UserType.from_orm(user=user) for user in users]
+    use_case = GetUsersUseCase()
+    return use_case.execute()
