@@ -1,5 +1,4 @@
 import strawberry
-from app.database.unit_of_work import UnitOfWork
 from app.graphql.schema.user_types import UserType, CreateUserInput
 from app.use_cases.user.create_user.create_user_use_case import CreateUserUseCase
 
