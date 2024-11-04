@@ -10,6 +10,6 @@ class GetUsersUseCase:
     users = self.unitOfWork.users.get_users()
     return [UserType(
       id=user.id,
-      username=user.email,
+      username=user.username,
       email=user.email
     ) for user in users]
